@@ -47,7 +47,7 @@ size = Vector2(10, 13)
 visibility_layer = 2
 script = ExtResource("1_lvtl7")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="EnemySprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ewkor")
 autoplay = "default"
 frame = 3

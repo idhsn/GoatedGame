@@ -102,11 +102,11 @@ radius = 5.0
 collision_mask = 2
 script = ExtResource("1_1bo8q")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="CoinSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hry3v")
 autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionSprite" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3rllg")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -3,17 +3,12 @@ extends CharacterBody2D
 const SPEED = 100.0
 const JUMP_VELOCITY = -240.0
 
-@onready var player_animation: AnimatedSprite2D = %PlayerAnimation
+@onready var player_sprite: AnimatedSprite2D = $PlayerSprite
 
 var is_dead := false
 func die():
 	is_dead = true
-	player_animation.play("death")
-
-var is_dead := false
-func die():
-	is_dead = true
-	animated_sprite_2d.play("die")
+	player_sprite.play("Death")
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -32,28 +27,18 @@ func _physics_process(delta: float) -> void:
 
 	# Flip sprite
 	if direction > 0:
-<<<<<<< HEAD
-		player_animation.flip_h = false
+		player_sprite.flip_h = false
 	elif direction < 0:
-		player_animation.flip_h = true
-=======
-		animated_sprite_2d.flip_h = false
-	elif direction < 0:
-		animated_sprite_2d.flip_h = true
->>>>>>> 7d5ff87ffb0b1df65204bc50675f5cac6e598a30
+		player_sprite.flip_h = true
 
 	# Play animations
 	if is_on_floor():
 		if direction == 0:
-			player_animation.play("idle")
+			player_sprite.play("idle")
 		else:
-			player_animation.play("Run")
+			player_sprite.play("Run")
 	else:
-<<<<<<< HEAD
-		player_animation.play("Jumpo")
-=======
-		animated_sprite_2d.play("Jumpo")
->>>>>>> 7d5ff87ffb0b1df65204bc50675f5cac6e598a30
+		player_sprite.play("Jumpo")
 
 	# Movement logic
 	if direction != 0:

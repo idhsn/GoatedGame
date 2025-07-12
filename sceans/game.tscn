@@ -1,13 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://dw10ttlacgs7p"]
+[gd_scene load_steps=16 format=3 uid="uid://dw10ttlacgs7p"]
 
-[ext_resource type="PackedScene" uid="uid://psk7rbe3bfa2" path="res://sceans/player.tscn" id="1_8jf7m"]
 [ext_resource type="Script" uid="uid://b48hcdcx8481n" path="res://scripts/game_manager.gd" id="1_nmy2v"]
 [ext_resource type="Texture2D" uid="uid://csy12muneeb4r" path="res://Assets/sprites/world_tileset.png" id="2_fppsr"]
 [ext_resource type="PackedScene" uid="uid://bvhthmlt4rnet" path="res://sceans/platform.tscn" id="3_f8mor"]
 [ext_resource type="PackedScene" uid="uid://l7jl70pg5j0" path="res://sceans/coin.tscn" id="4_1g8wf"]
 [ext_resource type="PackedScene" uid="uid://bodgy4srcmhcu" path="res://sceans/kill_zone.tscn" id="5_ct2aj"]
 [ext_resource type="PackedScene" uid="uid://co2rs2s3vwj1k" path="res://sceans/enemy.tscn" id="6_aguan"]
+[ext_resource type="PackedScene" uid="uid://b6n54q7s7eu6" path="res://sceans/player.tscn" id="7_nmy2v"]
 [ext_resource type="FontFile" uid="uid://n8acw1tjam4p" path="res://Assets/fonts/PixelOperator8.ttf" id="8_4i3d2"]
+[ext_resource type="Script" uid="uid://ycftkly33cos" path="res://scripts/player.gd" id="8_oflin"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8mor"]
 texture = ExtResource("2_fppsr")
@@ -230,24 +231,6 @@ tile_set = SubResource("TileSet_1g8wf")
 format = 2
 layer_0/tile_data = PackedInt32Array(65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 4, 589824, 0, 5, 655360, 0, 6, 720896, 0, -65527, 0, 1, -65532, 0, 1)
 
-[node name="Player" parent="." instance=ExtResource("1_8jf7m")]
-position = Vector2(-45, 0)
-
-[node name="Label" type="Label" parent="Player"]
-offset_left = -85.0
-offset_top = -57.0
-offset_right = 79.0
-offset_bottom = -41.0
-theme_override_fonts/font = ExtResource("8_4i3d2")
-theme_override_font_sizes/font_size = 16
-text = "NIGGGAAAAAAA"
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -7)
-zoom = Vector2(2.5, 2.5)
-limit_bottom = 120
-position_smoothing_speed = 1.0
-
 [node name="OneWay Platform" parent="." instance=ExtResource("3_f8mor")]
 position = Vector2(-44, -27)
 
@@ -269,3 +252,23 @@ shape = SubResource("WorldBoundaryShape2D_aguan")
 
 [node name="Enemy" parent="." instance=ExtResource("6_aguan")]
 position = Vector2(121, -12)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("7_nmy2v")]
+position = Vector2(-24, -11)
+collision_layer = 2
+script = ExtResource("8_oflin")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(0, -7)
+zoom = Vector2(2.5, 2.5)
+limit_bottom = 120
+position_smoothing_speed = 1.0
+
+[node name="Label" type="Label" parent="CharacterBody2D"]
+offset_left = -85.0
+offset_top = -57.0
+offset_right = 79.0
+offset_bottom = -41.0
+theme_override_fonts/font = ExtResource("8_4i3d2")
+theme_override_font_sizes/font_size = 16
+text = "NIGGGAAAAAAA"
