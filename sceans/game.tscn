@@ -268,4 +268,4 @@ position = Vector2(15, 35)
 shape = SubResource("WorldBoundaryShape2D_aguan")
 
 [node name="Enemy" parent="." instance=ExtResource("6_aguan")]
-position = Vector2(120, -12)
+position = Vector2(121, -12)

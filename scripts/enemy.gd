@@ -19,3 +19,7 @@ func _process(delta):
 
 	
 	position.x += direction * SPEED * delta
+
+
+
+	

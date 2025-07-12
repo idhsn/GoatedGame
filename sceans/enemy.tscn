@@ -44,6 +44,7 @@ animations = [{
 size = Vector2(10, 13)
 
 [node name="Enemy" type="Node2D"]
+visibility_layer = 2
 script = ExtResource("1_lvtl7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
