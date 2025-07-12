@@ -179,8 +179,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y2jts")
 }],
+<<<<<<< HEAD
 "loop": false,
 "name": &"death",
+=======
+"loop": true,
+"name": &"die",
+>>>>>>> 7d5ff87ffb0b1df65204bc50675f5cac6e598a30
 "speed": 5.0
 }, {
 "frames": [{
@@ -212,7 +217,11 @@ script = ExtResource("1_bx0fl")
 unique_name_in_owner = true
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_7fswv")
+<<<<<<< HEAD
 animation = &"death"
+=======
+animation = &"die"
+>>>>>>> 7d5ff87ffb0b1df65204bc50675f5cac6e598a30
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
