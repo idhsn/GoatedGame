@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dw10ttlacgs7p"]
+[gd_scene load_steps=19 format=3 uid="uid://dw10ttlacgs7p"]
 
 [ext_resource type="Script" uid="uid://b48hcdcx8481n" path="res://scripts/game_manager.gd" id="1_nmy2v"]
 [ext_resource type="Texture2D" uid="uid://csy12muneeb4r" path="res://Assets/sprites/world_tileset.png" id="2_fppsr"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ycftkly33cos" path="res://scripts/player.gd" id="8_oflin"]
 [ext_resource type="PackedScene" uid="uid://cc48g06d5ej7s" path="res://sceans/trollplatform.tscn" id="10_oflin"]
 [ext_resource type="PackedScene" uid="uid://cjek6nqklhelu" path="res://sceans/Interactions.tscn" id="11_djvpa"]
+[ext_resource type="PackedScene" uid="uid://be5jppitskypi" path="res://sceans/Pickable_Item.tscn" id="12_4s3r4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8mor"]
 texture = ExtResource("2_fppsr")
@@ -281,3 +282,6 @@ position = Vector2(179, 15)
 
 [node name="Interaction" parent="." instance=ExtResource("11_djvpa")]
 position = Vector2(19, -19)
+
+[node name="PickableItem" parent="." instance=ExtResource("12_4s3r4")]
+position = Vector2(-64, -10)
