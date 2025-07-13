@@ -15,6 +15,15 @@ run/main_scene="uid://dw10ttlacgs7p"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[global_group]
+
+Player=""
+
+[layer_names]
+
+2d_physics/layer_2="player"
+2d_physics/layer_7="Troll"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

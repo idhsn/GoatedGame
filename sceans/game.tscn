@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dw10ttlacgs7p"]
+[gd_scene load_steps=17 format=3 uid="uid://dw10ttlacgs7p"]
 
 [ext_resource type="Script" uid="uid://b48hcdcx8481n" path="res://scripts/game_manager.gd" id="1_nmy2v"]
 [ext_resource type="Texture2D" uid="uid://csy12muneeb4r" path="res://Assets/sprites/world_tileset.png" id="2_fppsr"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b6n54q7s7eu6" path="res://sceans/player.tscn" id="7_nmy2v"]
 [ext_resource type="FontFile" uid="uid://n8acw1tjam4p" path="res://Assets/fonts/PixelOperator8.ttf" id="8_4i3d2"]
 [ext_resource type="Script" uid="uid://ycftkly33cos" path="res://scripts/player.gd" id="8_oflin"]
+[ext_resource type="PackedScene" uid="uid://cc48g06d5ej7s" path="res://sceans/trollplatform.tscn" id="10_oflin"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8mor"]
 texture = ExtResource("2_fppsr")
@@ -190,7 +191,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.96667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(176, 5), Vector2(269.59, 5)]
+"values": [Vector2(168.83, -78.07), Vector2(263.335, 5)]
 }
 
 [sub_resource type="Animation" id="Animation_1g8wf"]
@@ -229,10 +230,10 @@ position = Vector2(56, -5)
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_1g8wf")
 format = 2
-layer_0/tile_data = PackedInt32Array(65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 4, 589824, 0, 5, 655360, 0, 6, 720896, 0, -65527, 0, 1, -65532, 0, 1)
+layer_0/tile_data = PackedInt32Array(65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 4, 589824, 0, 5, 655360, 0, 6, 720896, 0, -65532, 0, 1, -65529, 262144, 1)
 
 [node name="OneWay Platform" parent="." instance=ExtResource("3_f8mor")]
-position = Vector2(-44, -27)
+position = Vector2(-44, -31)
 
 [node name="Moving Platform" parent="." instance=ExtResource("3_f8mor")]
 position = Vector2(176, 5)
@@ -251,11 +252,12 @@ position = Vector2(15, 35)
 shape = SubResource("WorldBoundaryShape2D_aguan")
 
 [node name="Enemy" parent="." instance=ExtResource("6_aguan")]
-position = Vector2(121, -12)
+position = Vector2(93, -12)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("7_nmy2v")]
+[node name="CharacterBody2D" parent="." groups=["Player"] instance=ExtResource("7_nmy2v")]
 position = Vector2(-24, -11)
 collision_layer = 2
+collision_mask = 253
 script = ExtResource("8_oflin")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
@@ -265,10 +267,13 @@ limit_bottom = 120
 position_smoothing_speed = 1.0
 
 [node name="Label" type="Label" parent="CharacterBody2D"]
-offset_left = -85.0
+offset_left = -33.0
 offset_top = -57.0
-offset_right = 79.0
+offset_right = 33.0
 offset_bottom = -41.0
 theme_override_fonts/font = ExtResource("8_4i3d2")
 theme_override_font_sizes/font_size = 16
-text = "NIGGGAAAAAAA"
+text = "Xelmi"
+
+[node name="Platform" parent="." instance=ExtResource("10_oflin")]
+position = Vector2(179, 15)
