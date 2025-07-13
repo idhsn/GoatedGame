@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjek6nqklhelu"]
+
+[ext_resource type="Script" uid="uid://ca1j1dv65218i" path="res://scripts/Interactions.gd" id="1_qyfe4"]
+[ext_resource type="FontFile" uid="uid://cmav3nbk7j58m" path="res://Assets/fonts/PixelOperator8-Bold.ttf" id="2_6atty"]
+[ext_resource type="Texture2D" uid="uid://csy12muneeb4r" path="res://Assets/sprites/world_tileset.png" id="2_qyfe4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6atty"]
+atlas = ExtResource("2_qyfe4")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0amu3"]
+atlas = ExtResource("2_qyfe4")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_374li"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6atty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0amu3")
+}],
+"loop": true,
+"name": &"Frames",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggnk1"]
+size = Vector2(3.5, 55)
+
+[node name="Interaction" type="Node2D"]
+script = ExtResource("1_qyfe4")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -98.0
+offset_top = -52.0
+offset_right = 115.0
+offset_bottom = -28.0
+theme_override_fonts/font = ExtResource("2_6atty")
+theme_override_font_sizes/font_size = 24
+text = "[PRESS E ]"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_374li")
+animation = &"Frames"
+
+[node name="InteracTrig" type="Area2D" parent="."]
+position = Vector2(11, 14)
+collision_layer = 32
+collision_mask = 2
+
+[node name="InterTrig" type="CollisionShape2D" parent="InteracTrig"]
+position = Vector2(-20.25, -35)
+shape = SubResource("RectangleShape2D_ggnk1")
+
+[connection signal="body_entered" from="InteracTrig" to="." method="_on_troll_trigger_body_entered"]

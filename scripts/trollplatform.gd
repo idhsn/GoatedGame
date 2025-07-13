@@ -17,5 +17,4 @@ func _physics_process(delta: float) -> void:
 
 func _on_troll_trigger_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		print ("the body entered")
 		mooving = true
