@@ -3,11 +3,9 @@ extends Area2D
 @onready var timer = $Timer
 
 func _on_body_entered(body: Node2D) -> void:
-	print("You died")
-
-	if body.has_method("die"):
-		body.die()  # This will trigger the death animation
-		timer.start()
+	if body.has_method("set_hp") and body.hp > 0:
+		body.set_hp(body.hp - 1)
+		print("Player took damage! HP left:", body.hp)
 
 func _on_timer_timeout() -> void:
 	get_tree().reload_current_scene()

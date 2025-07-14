@@ -17,9 +17,9 @@ func _process(delta):
 		direction = 1
 		enemy_sprite.flip_h = false
 
-	
 	position.x += direction * SPEED * delta
 
-
-
-	
+func _on_area_entered(area: Area2D):
+	if area.name == "Player" and area.has_method("set_hp"):
+		area.set_hp(area.hp - 1)
+		print("Player hit by enemy! HP left:", area.hp)

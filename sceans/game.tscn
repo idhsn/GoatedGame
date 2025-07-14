@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dw10ttlacgs7p"]
+[gd_scene load_steps=22 format=3 uid="uid://dw10ttlacgs7p"]
 
 [ext_resource type="Script" uid="uid://b48hcdcx8481n" path="res://scripts/game_manager.gd" id="1_nmy2v"]
 [ext_resource type="Texture2D" uid="uid://csy12muneeb4r" path="res://Assets/sprites/world_tileset.png" id="2_fppsr"]
@@ -11,6 +11,10 @@
 [ext_resource type="Script" uid="uid://ycftkly33cos" path="res://scripts/player.gd" id="8_oflin"]
 [ext_resource type="PackedScene" uid="uid://cc48g06d5ej7s" path="res://sceans/trollplatform.tscn" id="10_oflin"]
 [ext_resource type="PackedScene" uid="uid://cjek6nqklhelu" path="res://sceans/Interactions.tscn" id="11_djvpa"]
+[ext_resource type="PackedScene" uid="uid://c4g41oqekj74b" path="res://sceans/coin_UI.tscn" id="11_pmv1k"]
+[ext_resource type="FontFile" uid="uid://cmav3nbk7j58m" path="res://Assets/fonts/PixelOperator8-Bold.ttf" id="11_sreem"]
+[ext_resource type="Script" uid="uid://lnrjc434m00u" path="res://scripts/uimanager.gd" id="12_4s3r4"]
+[ext_resource type="Script" uid="uid://btiw6kw67wok6" path="res://scripts/coin.gd" id="12_gx5sb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8mor"]
 texture = ExtResource("2_fppsr")
@@ -276,8 +280,69 @@ theme_override_fonts/font = ExtResource("8_4i3d2")
 theme_override_font_sizes/font_size = 16
 text = "Xelmi"
 
+[node name="UI" type="Control" parent="CharacterBody2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 11.0
+offset_right = 24.0
+offset_bottom = 11.0
+script = ExtResource("12_4s3r4")
+
+[node name="ScoreContainer" type="HBoxContainer" parent="CharacterBody2D/UI"]
+layout_mode = 0
+offset_left = -247.0
+offset_top = -140.0
+offset_right = -167.0
+offset_bottom = -104.0
+alignment = 1
+
+[node name="Coin" parent="CharacterBody2D/UI/ScoreContainer" instance=ExtResource("11_pmv1k")]
+position = Vector2(2, 2)
+script = ExtResource("12_gx5sb")
+
+[node name="Score" type="Label" parent="CharacterBody2D/UI/ScoreContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("11_sreem")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="HUD" type="Node2D" parent="CharacterBody2D"]
+
+[node name="HealthBarContainer" type="ColorRect" parent="CharacterBody2D/HUD"]
+offset_left = -13.0
+offset_top = -11.0
+offset_right = 12.0
+offset_bottom = -8.0
+color = Color(0.281627, 0.446589, 0.44866, 1)
+
+[node name="HealthBarFill" type="ColorRect" parent="CharacterBody2D/HUD/HealthBarContainer"]
+layout_mode = 0
+offset_right = 25.0
+offset_bottom = 3.0
+color = Color(1, 0.184314, 0, 1)
+
+[node name="DamageFlash" type="ColorRect" parent="CharacterBody2D/HUD"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -31.0
+offset_right = -0.400002
+offset_bottom = -2.61
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.3, 2.3)
+size_flags_stretch_ratio = 2.08
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
 [node name="Platform" parent="." instance=ExtResource("10_oflin")]
 position = Vector2(179, 15)
 
 [node name="Interaction" parent="." instance=ExtResource("11_djvpa")]
 position = Vector2(19, -19)
+
+[connection signal="body_entered" from="CharacterBody2D/UI/ScoreContainer/Coin" to="CharacterBody2D/UI/ScoreContainer/Coin" method="_on_body_entered"]
