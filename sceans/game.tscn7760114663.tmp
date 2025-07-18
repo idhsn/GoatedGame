@@ -6,15 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://l7jl70pg5j0" path="res://sceans/coin.tscn" id="4_1g8wf"]
 [ext_resource type="PackedScene" uid="uid://bodgy4srcmhcu" path="res://sceans/kill_zone.tscn" id="5_ct2aj"]
 [ext_resource type="PackedScene" uid="uid://co2rs2s3vwj1k" path="res://sceans/enemy.tscn" id="6_aguan"]
-[ext_resource type="Script" uid="uid://lvllo84jji7u" path="res://scripts/world_border.gd" id="6_n4vha"]
 [ext_resource type="PackedScene" uid="uid://b6n54q7s7eu6" path="res://sceans/player.tscn" id="7_nmy2v"]
 [ext_resource type="FontFile" uid="uid://n8acw1tjam4p" path="res://Assets/fonts/PixelOperator8.ttf" id="8_4i3d2"]
 [ext_resource type="Script" uid="uid://b6gn20xiu5ego" path="res://scripts/player.gd" id="8_oflin"]
+[ext_resource type="Script" uid="uid://crlp4101ko8gk" path="res://scripts/control.gd" id="9_pmv1k"]
+[ext_resource type="Script" uid="uid://swj2r7b20krs" path="res://scripts/uihud.gd" id="10_gx5sb"]
 [ext_resource type="PackedScene" uid="uid://cc48g06d5ej7s" path="res://sceans/trollplatform.tscn" id="10_oflin"]
 [ext_resource type="PackedScene" uid="uid://cjek6nqklhelu" path="res://sceans/Interactions.tscn" id="11_djvpa"]
 [ext_resource type="PackedScene" uid="uid://c4g41oqekj74b" path="res://sceans/coin_UI.tscn" id="11_pmv1k"]
 [ext_resource type="FontFile" uid="uid://cmav3nbk7j58m" path="res://Assets/fonts/PixelOperator8-Bold.ttf" id="11_sreem"]
-[ext_resource type="Script" uid="uid://lnrjc434m00u" path="res://scripts/uimanager.gd" id="12_4s3r4"]
 [ext_resource type="PackedScene" uid="uid://be5jppitskypi" path="res://sceans/Pickable_Item.tscn" id="16_gx5sb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f8mor"]
@@ -225,22 +225,21 @@ _data = {
 distance = -20.0
 
 [node name="Game" type="Node2D"]
-position = Vector2(24, -17)
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_nmy2v")
 
 [node name="Coin" parent="." instance=ExtResource("4_1g8wf")]
-position = Vector2(23, -41)
+position = Vector2(56, -5)
 
-[node name="Map" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_1g8wf")
 format = 2
-layer_0/tile_data = PackedInt32Array(65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 4, 589824, 0, 5, 655360, 0, 6, 720896, 0, -65532, 0, 1, -65529, 262144, 1, 65530, 131072, 2, 65529, 131072, 2, 65528, 131072, 2, 65527, 131072, 2, 65526, 131072, 2, 65525, 131072, 2, 65524, 131072, 2, 65523, 131072, 2, 65522, 131072, 2, 65521, 131072, 2, 65520, 131072, 2, 65519, 131072, 2, 65518, 131072, 2, 65517, 131072, 2, 65516, 131072, 2, 65515, 131072, 2, 65514, 131072, 2, 65513, 131072, 2, 65512, 131072, 2, 65511, 131072, 2, 65510, 131072, 2, 65509, 131072, 2, 65508, 131072, 2, 65507, 131072, 2, 65506, 131072, 2)
+layer_0/tile_data = PackedInt32Array(65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 4, 589824, 0, 5, 655360, 0, 6, 720896, 0, -65532, 0, 1, -65529, 262144, 1)
 
 [node name="OneWay Platform" parent="." instance=ExtResource("3_f8mor")]
-position = Vector2(23, -31)
+position = Vector2(-44, -31)
 
 [node name="Moving Platform" parent="." instance=ExtResource("3_f8mor")]
 position = Vector2(176, 5)
@@ -251,12 +250,11 @@ libraries = {
 }
 autoplay = "Move"
 
-[node name="Worldborder" parent="." instance=ExtResource("5_ct2aj")]
+[node name="KillZone" parent="." instance=ExtResource("5_ct2aj")]
 position = Vector2(-45, -7)
-script = ExtResource("6_n4vha")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Worldborder"]
-position = Vector2(-77, 93.17)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+position = Vector2(15, 35)
 shape = SubResource("WorldBoundaryShape2D_aguan")
 
 [node name="Enemy" parent="." instance=ExtResource("6_aguan")]
@@ -268,90 +266,67 @@ collision_layer = 2
 collision_mask = 253
 script = ExtResource("8_oflin")
 
+[node name="Label" type="Label" parent="CharacterBody2D"]
+offset_left = -33.0
+offset_top = -57.0
+offset_right = 33.0
+offset_bottom = -41.0
+theme_override_fonts/font = ExtResource("8_4i3d2")
+theme_override_font_sizes/font_size = 16
+text = "Xelmi"
+
+[node name="HUD" type="Node2D" parent="CharacterBody2D"]
+
+[node name="HealthBarContainer" type="ColorRect" parent="CharacterBody2D/HUD"]
+offset_left = -13.0
+offset_top = -11.0
+offset_right = 12.0
+offset_bottom = -8.0
+color = Color(0.281627, 0.446589, 0.44866, 1)
+
+[node name="HealthBarFill" type="ColorRect" parent="CharacterBody2D/HUD/HealthBarContainer"]
+layout_mode = 0
+offset_right = 25.0
+offset_bottom = 3.0
+color = Color(1, 0.184314, 0, 1)
+
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(0, -7)
 zoom = Vector2(2.5, 2.5)
 limit_bottom = 120
 position_smoothing_enabled = true
-position_smoothing_speed = 6.0
 
-[node name="Label" type="Label" parent="CharacterBody2D"]
-offset_left = -16.165
-offset_top = -15.48
-offset_right = 16.835
-offset_bottom = -7.48
-theme_override_fonts/font = ExtResource("8_4i3d2")
-theme_override_font_sizes/font_size = 8
-text = "Xelmi"
-metadata/_edit_use_anchors_ = true
+[node name="UIHUD" type="CanvasLayer" parent="CharacterBody2D"]
+layer = 0
+follow_viewport_enabled = true
+script = ExtResource("10_gx5sb")
 
-[node name="UIHUD" type="CanvasLayer" parent="."]
-offset = Vector2(70, 35)
-scale = Vector2(2.145, 2.145)
-transform = Transform2D(2.145, 0, 0, 2.145, 70, 35)
-script = ExtResource("12_4s3r4")
-
-[node name="CoinsUI" type="Control" parent="UIHUD"]
+[node name="Control" type="Control" parent="CharacterBody2D/UIHUD"]
 layout_mode = 3
-anchor_left = 0.329
-anchor_right = 0.432
-anchor_bottom = 0.068
-offset_left = 75.77
-offset_top = -10.68
-offset_right = -7.88498
-offset_bottom = 24.955
-grow_horizontal = 0
-
-[node name="ScoreContainer" type="BoxContainer" parent="UIHUD/CoinsUI"]
-layout_mode = 1
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-alignment = 1
+script = ExtResource("9_pmv1k")
 
-[node name="Coin" parent="UIHUD/CoinsUI/ScoreContainer" instance=ExtResource("11_pmv1k")]
-position = Vector2(-19, 5)
+[node name="ScoreContainer" type="BoxContainer" parent="CharacterBody2D/UIHUD/Control"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Score" type="Label" parent="UIHUD/CoinsUI/ScoreContainer"]
+[node name="Coin" parent="CharacterBody2D/UIHUD/Control/ScoreContainer" instance=ExtResource("11_pmv1k")]
+position = Vector2(-4, 2)
+
+[node name="Score" type="Label" parent="CharacterBody2D/UIHUD/Control/ScoreContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11_sreem")
 theme_override_font_sizes/font_size = 24
 text = "0"
 
-[node name="HealthHUD" type="Control" parent="UIHUD"]
-layout_mode = 3
-anchor_left = -0.19051
-anchor_top = -1.08024e-05
-anchor_right = -0.19051
-anchor_bottom = 0.0107917
-offset_left = 239.685
-offset_top = 12.007
-offset_right = 522.018
-offset_bottom = 35.187
-metadata/_edit_use_anchors_ = true
-
-[node name="HealthBarContainer" type="ColorRect" parent="UIHUD/HealthHUD"]
-layout_mode = 0
-offset_left = -13.0
-offset_top = -11.0
-offset_right = 137.0
-offset_bottom = -3.0
-color = Color(0.281627, 0.446589, 0.44866, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="HealthBarFill" type="ColorRect" parent="UIHUD/HealthHUD/HealthBarContainer"]
-layout_mode = 0
-offset_right = 150.0
-offset_bottom = 8.0
-color = Color(1, 0.184314, 0, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="TrollPlatform" parent="." instance=ExtResource("10_oflin")]
-position = Vector2(180, 15)
-moving_speed = 5000.0
-max_position_x = 225.0
+[node name="Platform" parent="." instance=ExtResource("10_oflin")]
+position = Vector2(179, 15)
 
 [node name="Interaction" parent="." instance=ExtResource("11_djvpa")]
-position = Vector2(-187, -8)
+position = Vector2(19, -19)
 
 [node name="PickableItem" parent="." instance=ExtResource("16_gx5sb")]
-position = Vector2(-120, -8)
+position = Vector2(-67, -10)

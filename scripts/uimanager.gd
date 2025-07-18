@@ -1,7 +1,8 @@
 # UIManager.gd
-extends Control
+extends CanvasLayer
 
-@onready var score: Label = $ScoreContainer/Score
+@onready var score: Label = $CoinsUI/ScoreContainer/Score
+
 
 
 func _ready():

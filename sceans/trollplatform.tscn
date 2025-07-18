@@ -27,7 +27,7 @@ sources/0 = SubResource("TileSetAtlasSource_ggnk1")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ggnk1"]
 size = Vector2(3.5, 55)
 
-[node name="Platform" type="Node2D"]
+[node name="TrollPlatform" type="Node2D"]
 script = ExtResource("1_ggnk1")
 
 [node name="PlatSprite" type="TileMap" parent="."]

@@ -4,12 +4,12 @@ extends CharacterBody2D
 const SPEED = 150.0
 const JUMP_VELOCITY = -240.0
 const GRAVITY = 700.0
-const MAX_HP = 3
+const MAX_HP = 10
 
 # Nodes
 @onready var player_sprite: AnimatedSprite2D = $PlayerSprite
-@onready var health_bar_fill: ColorRect = $HUD/HealthBarContainer/HealthBarFill
-@onready var damage_flash: ColorRect = $HUD/DamageFlash
+@onready var health_bar_fill: ColorRect = $"../UIHUD/HealthHUD/HealthBarContainer/HealthBarFill"
+
 
 # Player state
 var hp: int = MAX_HP
@@ -38,7 +38,6 @@ func set_hp(value: int) -> void:
 
 	hp = clamp(value, 0, MAX_HP)
 	update_health_bar()
-	flash_damage_feedback()
 
 	if hp <= 0 and not is_dead:
 		die()
@@ -50,23 +49,9 @@ func update_health_bar():
 	else:
 		printerr("ERROR: health_bar_fill is null!")
 
-func flash_damage_feedback():
-	if damage_flash:
-		damage_flash.modulate = Color(1, 0, 0, 0.4)
-		damage_flash.show()
-		get_tree().create_timer(0.2).connect("timeout", Callable(self, "_clear_damage_flash"))
-
-func _clear_damage_flash():
-	damage_flash.modulate = Color.TRANSPARENT
-
 # Physics process
 func _physics_process(delta: float) -> void:
 	if is_dead:
-		return
-
-	# Instant death if falling off map
-	if position.y > 1000:
-		set_hp(0)
 		return
 
 	# Apply gravity
