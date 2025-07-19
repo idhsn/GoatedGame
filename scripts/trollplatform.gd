@@ -4,7 +4,7 @@ extends Node2D
 @export var max_position_x: float = 200
 var mooving: bool = false
 
-@onready var plat_sprite: TileMap = $PlatSprite
+
 @onready var troll_trigger: Area2D = $troll_trigger
 
 func _physics_process(delta: float) -> void:

@@ -275,7 +275,7 @@ size = Vector2(10, 16)
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y2jts")
-animation = &"Run_with_GUNX"
+animation = &"Death"
 autoplay = "idle"
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
